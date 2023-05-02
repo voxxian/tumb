@@ -1,0 +1,1107 @@
+<html>
+<head>
+
+
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:300|Roboto' rel='stylesheet' type='text/css'>
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<meta name="color:Calendar Accent" content="#fde7e1"/>
+<meta name="color:Calendar Icon" content="#000"/>
+<meta name="color:Calendar Month Year" content="#000"/>
+<meta name="color:Calendar Weekdays" content="#525252"/>
+<meta name="color:Calendar Dates" content="#636363"/>
+
+
+<!--yukoki sticky note scripts-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+$(function() {
+$( "#stickynote1" ).draggable({ handle: "div.dragstickynote1" });
+$(".closestickynote1").click(function(){$("#stickynote1").fadeOut();});
+});
+</script>
+<!--yukoki sticky note scripts end-->
+
+<!-- this is the START of the sparkle-->
+
+<script type="text/javascript">
+// <![CDATA[
+var colour="#FC768A";
+var sparkles=50;
+
+/****************************
+* Tinkerbell Magic Sparkle *
+* (c) 2005 mf2fm web-design *
+* https://www.mf2fm.com/rv *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+var i, rats, rlef, rdow;
+for (var i=0; i<sparkles; i++) {
+var rats=createDiv(3, 3);
+rats.style.visibility="hidden";
+document.body.appendChild(tiny[i]=rats);
+starv[i]=0;
+tinyv[i]=0;
+var rats=createDiv(5, 5);
+rats.style.backgroundColor="transparent";
+rats.style.visibility="hidden";
+var rlef=createDiv(1, 5);
+var rdow=createDiv(5, 1);
+rats.appendChild(rlef);
+rats.appendChild(rdow);
+rlef.style.top="2px";
+rlef.style.left="0px";
+rdow.style.top="0px";
+rdow.style.left="2px";
+document.body.appendChild(star[i]=rats);
+}
+set_width();
+sparkle();
+}}
+
+function sparkle() {
+var c;
+if (x!=ox || y!=oy) {
+ox=x;
+oy=y;
+for (c=0; c<sparkles; c++) if (!starv[c]) {
+star[c].style.left=(starx[c]=x)+"px";
+star[c].style.top=(stary[c]=y)+"px";
+star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+star[c].style.visibility="visible";
+starv[c]=50;
+break;
+}
+}
+for (c=0; c<sparkles; c++) {
+if (starv[c]) update_star(c);
+if (tinyv[c]) update_tiny(c);
+}
+setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+if (starv[i]) {
+stary[i]+=1+Math.random()*3;
+if (stary[i]<shigh+sdown) {
+star[i].style.top=stary[i]+"px";
+starx[i]+=(i%5-2)/5;
+star[i].style.left=starx[i]+"px";
+}
+else {
+star[i].style.visibility="hidden";
+starv[i]=0;
+return;
+}
+}
+else {
+tinyv[i]=50;
+tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+tiny[i].style.width="2px";
+tiny[i].style.height="2px";
+star[i].style.visibility="hidden";
+tiny[i].style.visibility="visible"
+}
+}
+
+function update_tiny(i) {
+if (--tinyv[i]==25) {
+tiny[i].style.width="1px";
+tiny[i].style.height="1px";
+}
+if (tinyv[i]) {
+tinyy[i]+=1+Math.random()*3;
+if (tinyy[i]<shigh+sdown) {
+tiny[i].style.top=tinyy[i]+"px";
+tinyx[i]+=(i%5-2)/5;
+tiny[i].style.left=tinyx[i]+"px";
+}
+else {
+tiny[i].style.visibility="hidden";
+tinyv[i]=0;
+return;
+}
+}
+else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+set_scroll();
+y=(e)?e.pageY:event.y+sdown;
+x=(e)?e.pageX:event.x+sleft;
+}
+
+function set_scroll() {
+if (typeof(self.pageYOffset)=="number") {
+sdown=self.pageYOffset;
+sleft=self.pageXOffset;
+}
+else if (document.body.scrollTop || document.body.scrollLeft) {
+sdown=document.body.scrollTop;
+sleft=document.body.scrollLeft;
+}
+else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+sleft=document.documentElement.scrollLeft;
+sdown=document.documentElement.scrollTop;
+}
+else {
+sdown=0;
+sleft=0;
+}
+}
+
+window.onresize=set_width;
+function set_width() {
+if (typeof(self.innerWidth)=="number") {
+swide=self.innerWidth;
+shigh=self.innerHeight;
+}
+else if (document.documentElement && document.documentElement.clientWidth) {
+swide=document.documentElement.clientWidth;
+shigh=document.documentElement.clientHeight;
+}
+else if (document.body.clientWidth) {
+swide=document.body.clientWidth;
+shigh=document.body.clientHeight;
+}
+}
+
+function createDiv(height, width) {
+var div=document.createElement("div");
+div.style.position="absolute";
+div.style.height=height+"px";
+div.style.width=width+"px";
+div.style.overflow="hidden";
+div.style.backgroundColor=colour;
+return (div);
+}
+// ]]>
+</script>
+
+<meta https-equiv="Content-Language" content="en-us" />
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<style type="text/css">
+
+
+
+#cbox {
+    left: 300px;
+    bottom: -354px;
+    z-index: 9999;
+    position: fixed;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+    border: 5px solid #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 0px 0px 1px #fedbdb;
+}
+
+#cbox:hover {
+    bottom: 0px;
+}
+    
+#cboxtitle {
+    width: 180px;
+    height: 15px;
+    background-color: #ffffff;
+    background-image: url('https://41.media.tumblr.com/3827df8cb33c8426b76e87c2e5888822/tumblr_inline_npdg23RZcL1rnjuep_540.png');
+    padding: 8px 5px 5px 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 10px;
+    color: #db9494;
+    text-shadow: 1px 1px 1px #ffffff;
+    text-transform: uppercase;
+}
+
+#cboxdesc {
+    width: 180px;
+    height: 40px;
+    padding: 5px;
+    background-color: #ffffff;
+    overflow: auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 9px;
+    text-align: justify;
+    letter-spacing: 1px;
+    color: #a19090;
+}
+
+
+
+
+
+#stickynote1 {
+    width: 180px;
+    margin-bottom: 20px;
+    position: fixed;
+    z-index: 100000000000;
+    top: 30px; /** position from top of screen **/
+    left: 30px; /** position from left of screen **/
+}
+
+#stickynote1 {
+    width: 180px; /** width of your sticky note **/
+    background-color: rgba(255,192,203,1.0); /** background colour **/
+}
+
+.dragstickynote1 {
+    font-family: consolas;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+    background-color: rgba(255,255,255,0.4);
+}
+
+.closestickynote1 {
+    cursor: pointer;
+    margin-left: 148px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-family: arial;
+    font-size: 10px;
+    position: absolute;
+    text-align: center;
+    float: right;
+    background-color: rgba(255,255,255,0.4);
+}
+
+.stickynotecontent {
+    padding: 10px;
+    font-family: consolas;
+    font-size: 10px;
+}
+
+.stickynotecontent b,strong {
+    color: #000000; /** colour of bolded text **/
+}
+
+.stickynotecontent i,em {
+    color: #666666; /** colour of italic text **/
+}
+
+.stickynotecontent a {
+    text-decoration: underline;
+    color: #666666; /** colour of linked text **/
+}
+
+.stickynotecontent a:hover {
+    color: #aaaaaa; /** colour of hovered linked text **/
+}
+
+#popitmenu{
+position: absolute;
+color:#ac8d8d;
+background-color: #fdeaf1;
+border:1px solid #ac8d8d;
+font-family:"Century Gothic";
+font-size:10px;
+line-height: 14x;
+z-index: 100;
+visibility: hidden;
+letter-spacing:2px;
+}
+
+#popitmenu a{
+color:#ac8d8d;
+text-decoration: none;
+padding-left: 6px;
+color: black;
+display: block;
+}
+
+#popitmenu a:hover{ /*hover background color*/
+background-color: #ffccff;
+}
+
+</style>
+
+<!-- this is the end of the sparkle-->
+
+<!--a
+        __          __             __   _                 _     
+  ___  / /__  _____/ /__________  / /__(_)___  ___  _____(_)____
+ / _ \/ / _ \/ ___/ __/ ___/ __ \/ //_/ / __ \/ _ \/ ___/ / ___/
+/  __/ /  __/ /__/ /_/ /  / /_/ / ,< / / / / /  __(__  ) (__  ) 
+\___/_/\___/\___/\__/_/   \____/_/|_/_/_/ /_/\___/____/_/____/  
+
+     _                           _            _       _   _               
+    | |                         | |          | |  o  | | | |              
+_|_ | |     _   _  _  _    _    | |          | |     | | | |         __,  
+ |  |/ \   |/  / |/ |/ |  |/    |/ \_|   |   |/_) |  |/  |/  |   |  /  |  
+ |_/|   |_/|__/  |  |  |_/|__/   \_/  \_/|/  | \_/|_/|__/|__/ \_/|_/\_/|_/
+                                        /|                                
+                                        \|    
+    *made for https://diobrando.god.jp                                    
+    
+    * youre more than welcome to edit this to your hearts desire
+    *feel free to use as a base code (but keep my credit on the page)
+    *shoot me a message or an ask if something isnt working 
+    contact: https://www.killuazoldyck.com
+    
+    *enjoy nyall
+
+-->
+
+
+ 
+<link rel="shortcut icon" href="{Favicon}" />
+<link rel="alternate" type="application/rss+xml" href="{RSS}" />
+<title>{Title}</title>
+{block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+
+    <meta name="color:Background" content="#cccccc">
+    <meta name="color:Borders" content="#8d7caa"/>
+    <meta name="color:Info" content="#efebf7"/>
+    <meta name="color:Title" content="#000000"/>
+    <meta name="color:Posts" content="#ffffff"/>
+    <meta name="color:Text" content="#8d7caa" />
+    <meta name="color:Link" content="#d49bd5" />
+    <meta name="color:Link hover" content="#ffffff" />
+    <meta name="color:Side Link" content="#5e5373" />
+    <meta name="color:Side Link Hover" content="#d0c3e6" />
+    <meta name="color:Bold" content="#ad7498" />
+    <meta name="color:Italic" content="#7da8c2"/>
+    
+    <meta name="if:Floating Image" content="0" />
+    <meta name="if:Background Cover" content="0" />
+    
+    <meta name="select:Font" content="ms gothic" title="ms gothic">
+    <meta name="select:Font" content="Inconsolata" title="Inconsolata">
+    <meta name="select:Font" content="Open Sans" title="Open Sans">
+    
+    <meta name="select:Floating Image" content="left" title="Left">
+    <meta name="select:Floating Image" content="right" title="Right">
+   
+    <meta name="image:sidebar" content=""/>
+    <meta name="image:Background Image" content="" />
+    <meta name="image:Floating Image" content="" />
+    <meta name="text:Link Symbol" content="★">
+    <meta name="text:Link 1" content="Link 1">
+    <meta name="text:Link 1 URL" content="/">
+    <meta name="text:Link 2" content="Link 2">
+    <meta name="text:Link 2 URL" content="/">
+    <meta name="text:Link 3" content="Link 3">
+    <meta name="text:Link 3 URL" content="/">
+    <meta name="text:Link 4" content="Link 3">
+    <meta name="text:Link 4 URL" content="/">
+    <meta name="text:Link 5" content="Link 3">
+    <meta name="text:Link 5 URL" content="/">
+   
+    <meta name="text:Opacity" content="1.0" />
+
+   
+ </head>
+       
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="https://static.tumblr.com/7qjmkr5/IUmmdsy41/jquery.style-my-tooltips.js"></script>
+<script>
+(function($){
+$(document).ready(function(){
+$("[title]").style_my_tooltips();
+});
+})(jQuery);
+</script>
+
+<link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+
+*, body, a, a{cursor: url(https://64.media.tumblr.com/tumblr_m2wivg9oxq1qfamg6.gif), auto;}
+
+/*cursor above*/
+
+/* scrollbar */
+
+::-webkit-scrollbar {width: 5px; height: 3px; padding-right:2px; background:{color:posts}; }
+::-webkit-scrollbar-thumb {background:none; padding:2px; border: 1px solid {color:borders};}
+
+/* hover tooltip */
+
+#s-m-t-tooltip{
+max-width:200px;
+margin:15px;
+padding:2px 8px;
+border:1px solid {color:borders};
+background:{color:posts};
+color:{color:text};
+font-size:10px;
+font-family:{select:font};
+text-transform:lowercase;
+-webkit-transition:all 0.2s ease-out;
+-moz-transition:all 0.2s ease-out;
+transition:all 0.2s ease-out;
+}
+ 
+body {color:{color:text}; background-color:{color:Background};background-image: url('{image:background image}');  top: 0;background-attachment: fixed; {block:ifbackgroundcover}-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{/block:ifbackgroundcover};  font-family:{select:font}; font-size:12px; line-height:110%; text-align:justify; -webkit-transition: opacity 0.8s linear; opacity: {text:Opacity};}
+ 
+a:link, a:active, a:visited{color: {color:link}; text-decoration:none;-webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear;}
+ 
+a:hover {
+color:{color:link hover};-webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear;}
+ 
+small{font-size:auto}
+
+big{font-size:auto}
+
+b, strong{color:{color:bold}}
+
+h1 {font-size:15px;}
+
+i, em {color:{color:italic}}
+
+p{margin-top:6px; margin-bottom:6px}
+
+blockquote {padding:0px; padding-left:10px; margin:8px; border-left:1px solid {color:borders}}
+ 
+img a{border:none; width:100%;}
+ 
+#container {background-color:transparent; width: 500px; margin: 0 auto -10px auto}
+
+/* post container */
+ 
+#entries {margin-left:500px; text-align: justify;}
+ 
+/* posts */
+
+#posts {margin: 30px 0 0px 0;margin-bottom: 30px; width: 500px;text-align: justify; padding: 5px;border: 1px solid {color:borders}; background-color:{color:posts}; opacity:{text:opacity};}
+
+#posts img {width:relative; height:relative; max-width:95%; padding:10px;}
+
+h2 {
+font-family:{select:font}; font-weight:100; line-height:17px;
+}
+ 
+
+ 
+#info{padding-top:5px; display:block; padding-bottom:0px; margin-bottom:-10px;  width:auto; font-size:11px; font-family:{select:font}; margin-left:5px; margin-right:5px; text-transform:uppercase; background:{color:Info};}
+ 
+.audio{background-color:black; display:block}
+
+/* chat */
+ 
+.user_1 .label {color:{color:link}; font-weight:bold}
+.user_2 .label {color:{color:text}; font-weight:bold}
+.user_3 .label {color:{color:link}; font-weight:text}
+
+
+ul.chat, .chat ol, .chat li {list-style:none; margin:0px; padding:0px}
+ 
+.notes img{width:10px; position:relative; top:1px;}
+ol.notes, .notes li{width:490px; list-style:none; margin:0px 0 -1px 5px; padding:0px}
+
+/* sidebar */
+
+#sb {
+    background-color:transparent; 
+    width: 600px;  
+    text-align: center; 
+    margin: 0 auto -10px auto;
+    font-size:12px;
+    position:fixed;
+}
+    
+
+
+#sideimage {
+    position: fixed;
+    width: 140px;
+    margin: auto;
+    top: 170px;
+    left: 240px;
+    z-index:1;
+    opacity:{text:opacity};
+   
+}
+
+#sideimage img {
+    height: 150px;
+    width: 150px;
+    border: 1px solid {color:borders};
+
+}
+
+#ex {
+    position: fixed;
+    width: 295px;
+    float: left;
+    top: 325px;
+    left: 93px;
+}
+ 
+ 
+#ex a {
+    font-family:{select:font};
+    font-size:12px;
+    color: {color:side link};
+    text-transform: lowercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-align: center;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    opacity: {text:opacity};
+}
+ 
+#ex a:hover {
+    color: {color:side link hover};
+}
+
+#pag {
+    position: fixed;
+    width: 295px;
+    float: left;
+    top: 345px;
+    left: 93px;
+}
+ 
+ 
+#pag a {
+    font-family:{select:font};
+    font-size:12px;
+    color: {color:side link};
+    text-transform: lowercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-align: center;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    opacity: {text:opacity};
+}
+ 
+#pag a:hover {
+    color: {color:side link hover};
+}
+
+#sidelinks {
+    position: fixed;
+    width: 100px;
+    float: left;
+    top: 170px;
+    left: 33px;
+}
+ 
+ 
+#sidelinks a.blog {
+    background-color: {color:sidebarbg};
+    border:1px solid {color:borders};
+    display: block;
+    width: 25px;
+    height: 18px;
+    line-height: 17px;
+    font-family:{select:font};
+    font-size: 15px;
+    color: {color:links};
+    text-transform: lowercase;
+    text-decoration: none;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 3.5px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    opacity:0.7;
+}
+ 
+#sidelinks a.blog:hover {
+    color: #000;
+}
+
+ 
+     #ll1 {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 170px;
+    left: 86px;
+    width: 10px; 
+    height: 16px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: none;
+    background: {color:posts};
+    padding: 5px;
+    z-index:5;
+    border:1px solid {color:borders};
+}
+
+#ll1 a {
+    color: {color:link};
+}
+
+#ll1 a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+     #ll2 {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 201px;
+    left: 86px;
+    width: 10px; 
+    height: 16px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: none;
+    background: {color:posts};
+    padding: 5px;
+    z-index:999999999;
+    border:1px solid {color:borders};
+}
+
+#ll2 a {
+    color: {color:link};
+}
+
+#ll2 a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+     #ll3 {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 232px;
+    left: 86px;
+    width: 10px; 
+    height: 16px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: none;
+    background: {color:posts};
+    padding: 5px;
+    z-index:999999999;
+    border:1px solid {color:borders};
+}
+
+#ll3 a {
+    color: {color:link};
+}
+
+#ll3 a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+     #ll4 {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 263px;
+    left: 86px;
+    width: 10px; 
+    height: 16px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: none;
+    background: {color:posts};
+    padding: 5px;
+    z-index:9999999;
+    border:1px solid {color:borders};
+}
+
+#ll4 a {
+    color: {color:link};
+}
+
+#ll4 a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+     #ll5 {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 294px;
+    left: 86px;
+    width: 10px; 
+    height: 16px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: none;
+    background: {color:posts};
+    padding: 5px;
+    z-index:99999999;
+    border:1px solid {color:borders};
+}
+
+#ll5 a {
+    color: {color:link};
+}
+
+#ll5 a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+    #titl {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 145px;
+    left: 86px;
+    width: 294px; 
+    height: 10px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: none;
+    background: {color:posts};
+    padding: 5px;
+    z-index:999999;
+    border:1px solid {color:borders};
+}
+
+#titl a {
+    color: {color:link};
+}
+
+#titl a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+    #desc {
+    position: fixed;
+opacity: {text:Opacity};
+    top: 170px;
+    left: 110px;
+    width: 115px; 
+    height: 140px;
+    font-family:{select:font};
+    font-size: 12px;
+    color:{color:text};
+    letter-spacing: 1px;
+    text-align: center;
+    overflow: auto;
+    overflow-x: hidden;
+    background: {color:posts};
+    padding: 5px;
+    z-index:2;
+    border:1px solid {color:borders};
+}
+
+#desc a {
+    color: {color:link};
+}
+
+#desc a:hover {
+    color: {color:link hover};
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+#picture
+{
+position:fixed;
+{select:floating image}:0px;
+bottom:0px;
+z-index:100
+}
+
+/************************  calendar  ************************/    
+table.calendar {
+   position:fixed;
+   top:20px;
+   left:1050px;
+   padding:10px;
+   font:10px/1.8 'Work Sans', calibri, sans-serif;
+   text-align:center;
+   color:{color:Calendar Dates};
+   background:#fff;
+}
+table.calendar td, table.calendar th {padding:0 5px;}
+/*** icon ***/
+.fa-calendar {
+   margin-left:-5px;
+   margin-right:7px;
+   padding:6px 1px 7px 7px;
+   font-size:9px;
+   background:{color:Calendar Accent};
+   color:{color:Calendar Icon};
+}
+table.calendar tr:nth-child(1) th:hover:after {
+   position:absolute;
+   top:6px;
+   left:30px;
+   content:'by felinum 🐾';
+   width:180px;
+   font:8px/1.8 'Work Sans', calibri, sans-serif;
+   letter-spacing:2px;
+   background:#fff;
+}
+/*** month & year ***/
+table.calendar tr:nth-child(1) th {
+   border-bottom:1px solid {color:Calendar Accent};
+   letter-spacing:7px;
+   font-size:8px;
+   text-transform:uppercase;
+   text-align:left;
+   color:{color:Calendar Month Year};
+}
+/*** weekdays ***/
+table.calendar tr:nth-child(2) {
+   font-weight:bold;
+   color:{color:Calendar Weekdays};
+   text-shadow:3px 3px 2px {color:Calendar Accent};
+}
+/*** message on hover ***/
+table.calendar tr td:hover:before {
+   position:absolute;
+   max-width:100px;
+   margin-left:-9px;
+   margin-top:2.7em;
+   padding:2px 4px;
+   background:#fff;
+   border:1px solid #ccc;
+   -webkit-box-shadow: 3px 3px 0px 0px {color:Calendar Accent};
+   -moz-box-shadow: 3px 3px 0px 0px {color:Calendar Accent};
+   box-shadow: 3px 3px 0px 0px {color:Calendar Accent};
+   color:#000;
+}
+
+/************************  calendar updates   ************************/
+/*** update day ***/
+table.calendar tr:nth-child(5) td:nth-child(5) {
+   border:1px solid #ccc;
+   -webkit-box-shadow:3px 3px 0px 0px {color:Calendar Accent};
+   -moz-box-shadow:3px 3px 0px 0px {color:Calendar Accent};
+   box-shadow:3px 3px 0px 0px {color:Calendar Accent};
+   color:#000;
+}
+/*** hover text on update day ***/
+table.calendar tr:nth-child(5) td:nth-child(5):hover:before {
+   content:'homestuck day lol';
+}
+
+</style>
+
+<body>
+
+
+
+<div id="cbox">
+<div id="cboxtitle">chatbox</div>
+<div id="cboxdesc">
+
+welcome to my chatbox! (*＾▽＾)／ pls dont spam or send inappropriate comments.  
+
+</div> <!-- IMPORTANT! PLEASE KEEP THIS HERE -->
+
+<iframe src="https://www3.cbox.ws/box/?boxid=3527842&boxtag=B52OpE" width="190" height="300" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe>	
+
+</div> <!-- IMPORTANT! PLEASE KEEP THIS HERE -->
+
+
+
+
+<script type="text/javascript" src="https://static.tumblr.com/iuggpng/bGqm4yfv9/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/micaelis/tmblrnotes/master/felinumCal.js"></script>
+<div id="calendar"></div>
+
+<div id="stickynote1">
+<div class="closestickynote1">X</div>
+<div class="dragstickynote1">> sticky note 1</div>
+<div class="stickynotecontent">
+thank you for visiting my blog! check out my OW mains scattered throughout the page!! my #1 =======>
+</div>
+</div><!--stickynote1 end-->
+
+<!-- Wikplayer https://www.wikplayer.com -->
+<script type="text/javascript" src="https://www.wikplayer.com/code.js" 
+data-config="{'skin':'skins/wikfull/funkyRed/skin.css','volume':50,'autoplay':false,'shuffle':false,'repeat':1,'showcomment':false,'marqueetexton':true,'placement':'top','showplaylist':false,'playlist':[{'title':'addicted%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Flk7zgl53pe9xxet%2FSickick%20-%20Addicted%20(Audio).mp3%3Fdl%3D1'},{'title':'bermuda%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fy5qomhzi97f2p2j%2FSickick%20-%20Bermuda%20(Audio).mp3%3Fdl%3D1'},{'title':'cursed%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fmr0yp88c4xwkqvi%2Fcursed.mp4%3Fdl%3D1'},{'title':'do%20you%20feel%20safe%3F%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fbohu86vvkbdkhvi%2FDo%20You%20Feel%20Safe.mp3%3Fdl%3D1'},{'title':'goku%20-%20pelly','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Ff377oca7wolt3we%2FPelly%2520-%2520Goku%2520%2528Anime%2520Music%2520Video%2529.mp3%3Fdl%3D1'},{'title':'honor%20roll%20-%20mishlawi','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fyqt8txllw2nssfy%2Fmishlawi%2520-%2520honor%2520roll%2520%2528audio%2529.mp3%3Fdl%3D1'},{'title':'hotline%20bling%2F%2Fhow%20deep%20is%20your%20love%20-%20sickick%20version','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fivsrd5k8oig8js3%2FHotline%20Bling%20How%20Deep%20Is%20Your%20Love%20-%20Drake%20%26%20Calvin%20Harris%20(SICKICK%20VERSION).mp3%3Fdl%3D1'},{'title':'infected%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Favu8gqxv2puyswd%2FSickick%20-%20Infected.mp3%3Fdl%3D1'},{'title':'it%27s%20goin%20down%20-%20sickick%20(remix)','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Flcniaaobrgwpa7f%2Fsickick%2520-%2520it%2527s%2520goin%2520down%2520%2528yung%2520joc%2520x%2520jeremih%2520remix%2529.mp3%3Fdl%3D1'},{'title':'lost%20my%20way%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2F74dv0ctruzswz7h%2FSickick%20-%20Lost%20My%20Way%20(Audio).mp3%3Fdl%3D1'},{'title':'love%20thing%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fl3y3omvf6z9xmwk%2FSickick%20-%20Love%20Thing%20(Audio).mp3%3Fdl%3D1'},{'title':'mind%20games%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fln3wyukgnoaietk%2FSickick%20-%20Mind%20Games%20(Official%20Video).mp3%3Fdl%3D1'},{'title':'moonlight%20-%20xxxtentacion','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fh1heyx08weqjk67%2FSAD!.mp3%3Fdl%3D1'},{'title':'mothman%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fp6m1iuna5s2jel5%2FMothman.mp3%3Fdl%3D1'},{'title':'naruto%20-%20pelly','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2F30witltafl9undy%2FNaruto%2520-%2520Pelly%2520%2528Anime%2520Music%2520Video%2529.mp3%3Fdl%3D1'},{'title':'no%20games%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fujsmmxeweob9qai%2FSickick%20-%20No%20Games%20(Official%20Video).mp3%3Fdl%3D1'},{'title':'often%2F%2Fwaves%20-%20sickick%20version','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fz8os0uxfh33441n%2FOften%20Waves%20-%20The%20Weekend%20%26%20Mr.%20Probz%20(SICKICK%20VERSION).mp3%3Fdl%3D1'},{'title':'poppin%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2F4sk1kph3ypoceec%2FSickick%2520-%2520Poppin%2520%2528Official%2520Music%2520Video%2529.mp3%3Fdl%3D1'},{'title':'position%20-%20pelly','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Ft8sq78gvgdn8x40%2FPelly%2520-%2520Position.mp3%3Fdl%3D1'},{'title':'rose%20-%20pelly','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fzpb11t3n5iyyafq%2FPelly%2520-%2520Rose.mp3%3Fdl%3D1'},{'title':'sad%20-%20xxxtentacion','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fh1heyx08weqjk67%2FSAD!.mp3%3Fdl%3D1'},{'title':'say%20my%20name%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Flhp2l4gszarfz63%2FSickick%20-%20Say%20My%20Name%20(Official%20Video).mp3%3Fdl%3D1'},{'title':'talkin%20to%20the%20moon%20-%20sickick%20(bruno%20mars%20remix)','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fp4jg7s0m781rz5k%2FSickick%2520-%2520Talking%2520to%2520the%2520Moon%2520%2528Bruno%2520Mars%2520Remix%2529%2520%255BExtended%255D.mp3%3Fdl%3D1'},{'title':'tempted%20to%20fk%20-%20sickick','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2F38l6f3oydhnvxrt%2FSickick%2520-%2520Tempted%2520to%2520Fk%2520%2528Pole%2529.mp3%3Fdl%3D1'},{'title':'the%20box%20-%20kid%20travis%20cover','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2F9bzl2ge9lgg0zsm%2FRoddy%2520Rich%2520-%2520The%2520Box%2520%2528Cover%2529%2520by%2520Kid%2520Travis%2520%255BLyrics%255D.mp3%3Fdl%3D1'},{'title':'the%20weeknd%20x%20spice%20-%20sickick%20(remix)','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Fjt9ayaeia45lphb%2FThe%2520Weeknd%2520X%2520Spice%2520%2528SickickMusic%2520Remix%2529%2520-%2520TikTok%2520Extended%2520Perfect%2520Loop.mp3%3Fdl%3D1'},{'title':'what%27s%20left%20of%20me%20-%20kid%20travis','url':'https%3A%2F%2Fwww.dropbox.com%2Fs%2Ftxjzn1rgr1qcmnr%2FKid%2520Travis%2520-%2520What%2527s%2520Left%2520Of%2520Me%2520%2528Lyrics%2529.mp3%3Fdl%3D1'}]}" ></script>
+<!-- Wikplayer code end -->
+
+
+
+
+
+
+<div id="sb">
+
+<div id="ll1">
+<a href="{text:link 1 url}" title="{text:link 1}">{text:link symbol}</a>
+</div>
+<div id="ll2">
+<a href="{text:link 2 url}" title="{text:link 2}">{text:link symbol}</a>
+</div>
+<div id="ll3">
+<a href="{text:link 3 url}" title="{text:link 3}" >{text:link symbol}</a>
+</div>
+<div id="ll4">
+<a href="{text:link 4 url}" title="{text:link 4}" >{text:link symbol}</a>
+</div>
+<div id="ll5">
+<a href="{text:link 5 url}" title="{text:link 5}" >{text:link symbol}</a>
+</div>
+
+<center>
+
+
+
+<div id="desc">
+{description}
+</div>
+<div id="titl">
+{title}
+</div>
+
+<div id="sideimage">
+    <img src="{image:sidebar}">
+</div>
+
+<div id="ex">
+<a href="/" >refresh</a> -
+<a href="/ask" >message</a> -
+<a href="/submit" >submit</a> -
+<a href="/tags" >tags page</a>
+</div>
+
+<div id="pag"> 
+{block:Pagination}
+{block:PreviousPage}
+<a href="{PreviousPage}"><<-</a>
+{/block:PreviousPage}
+{block:JumpPagination length="5"}
+{block:CurrentPage}
+<span class="current_page">{PageNumber}</span>
+{/block:CurrentPage}
+{block:JumpPage}
+<a class="jump_page" href="{URL}">{PageNumber}</a>
+{/block:JumpPage}
+{/block:JumpPagination}
+{block:NextPage}
+ <a href="{NextPage}">->></a>
+{/block:NextPage} {/block:Pagination}
+ </div>
+
+</div>
+
+</div>
+
+ 
+<div id="entries">
+{block:posts}
+ 
+<div id="posts">
+{block:Text}{block:Title}<h1>{Title}</h1>{/block:Title}{Body}{/block:Text}
+ 
+ 
+{block:Quote}<h2>“{Quote}”</h2> <br>— {Source}<br>{/block:Quote}
+ 
+{block:Link}<a href="{URL}"><h1>{Name}</h1></a>
+{block:Description}<p>{Description}</p>{/block:Description}{/block:Link}
+ 
+{block:Photo}<center><img src="{PhotoURL-500}"/></center>
+{block:Caption}{Caption}{/block:Caption}{/block:Photo}
+ 
+{block:Photoset}<center>{Photoset-500}</center>
+{block:Caption}{Caption}{/block:Caption}{/block:Photoset}
+ 
+{block:Chat}<ul class="chat">{block:Lines}<li class="user_{UserNumber}">{block:Label}<span class="label">{Label}</span>{/block:Label}&nbsp;{Line}</li>{/block:Lines}</ul>{/block:Chat}
+ 
+{block:Video}{Video-400}{block:Caption}{Caption}{/block:Caption}{/block:Video}
+
+{block:Answer}<b>{Asker} asked: {Question}</b><br>{Answer}{/block:Answer}
+ 
+ 
+{block:Audio}{AudioPlayerWhite}<br>
+{block:Caption}{Caption}{/block:Caption} {/block:Audio}
+ 
+<center><br><div id="info">{block:Date}<a href="{Permalink}"> <a href="{ReblogURL}" target="_blank" class="details"> +Reblog</a> <b>-</b> <a href="{ReblogParentURL}"> {TimeAgo}</a>{/block:Date}{block:NoteCount} <b>-</b> <a href="{Permalink}">{NoteCountWithLabel}</a>{/block:NoteCount}{block:RebloggedFrom} <b>-</b> <a href="{ReblogParentURL}" title="{lang:Reblogged From ReblogParentName}">via</a> {/block:RebloggedFrom}{block:ContentSource}<b>-</b> <a href="{SourceURL}" title="{lang:Originally From ReblogRootName}">source</a>{/block:ContentSource}<br>
+ {block:HasTags}{block:Tags} <b>+</b><a href="{TagURL}">{Tag} </a> {/block:Tags}<b></b>{/block:HasTags}</center>
+<br /></div>
+ 
+{/block:Posts}
+ 
+{block:PostNotes}{PostNotes}{/block:PostNotes}<br />
+</div>
+</div>
+
+{block:iffloatingimage}<img src="{image:floating image}" id="picture">{/block:iffloatingimage}
+
+<a href='https://www.killuazoldyck.com'><img style="position:fixed; opacity:.5; width: auto; bottom:5px; left:5px;" src="https://33.media.tumblr.com/e97c9926f4367c199582743e49eea758/tumblr_inline_mljkdtaaGV1qz4rgp.gif" title="theme by killua"></a>
+
+<img style="position: fixed; left: 0; bottom: 0;" src="https://64.media.tumblr.com/e7551d299b45dfe4a916dd3dff32ce8a/9953dcb73666c2c6-13/s250x400/58656e61f19cab072ca274100e913fb6ff44437a.png">
+
+<img style="position: fixed; left: 240px; top: 65px;" src="https://64.media.tumblr.com/41703004f1cd101aee170028a382503b/698c84b50ed54d4f-c7/s250x400/af0ef8ddc6b8d49611d095fd4a55ded1c8b81e8e.pnj">
+
+<img style="position: fixed; left: 1220px; top: 279px;" src="https://i.imgur.com/nFp8buJ.png">
+
+<img style="position: fixed; left: 117px; bottom: 67px;" src="https://i.imgur.com/eMxsxmz.png">
+
+<img style="position: fixed; right: 0; bottom: 0;" src="https://64.media.tumblr.com/f9a7efcc146c2e50eab27e5391995f94/09134ad29f3a4e18-65/s400x600/ac09c03fb0df6e709a0d6e14426782fcfd292876.png">
+
+<img style="position: fixed; right: 220px; bottom: 195px;" src="https://i.imgur.com/zlgdfjO.png">
+
+
+</body>
+</html>
